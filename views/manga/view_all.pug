@@ -1,0 +1,29 @@
+extends ../layout2
+
+block content
+    h2.page-title Manga
+    a.create-new(href='/manga/add') Add Manga
+    table
+        thead
+            tr
+                th Title
+                th Publisher/Magazine
+                th Genre
+                th Number of Chapters
+                th Number of Volumes
+                th Image
+                th Description
+
+        tbody
+            each manga in mangas
+                tr
+                    td= manga.title
+                    td= manga.publisher_magazine
+                    td= manga.genre
+                    td= manga.num_of_chapters
+                    td= manga.num_of_volumes
+                    td
+                        img(src=manga.image)
+                    td= manga.description
+                    td
+                        a.view-items(href=`/manga/profile/${manga.id}`) View Manga

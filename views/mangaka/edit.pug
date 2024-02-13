@@ -1,0 +1,5 @@
+extends ../layout2
+
+block content
+    include ../mixins/mangakaForm
+    +mangakaForm(mangaka, `/mangaka/edit/${mangaka.id}`, `/mangaka/profile/${mangaka.id}`)

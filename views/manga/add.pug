@@ -1,0 +1,5 @@
+extends ../layout2
+
+block content
+    include ../mixins/mangaForm
+    +mangaForm(manga, genres, `/manga/add`, `/manga`)

@@ -1,0 +1,5 @@
+extends ../layout
+
+block content
+    include ../mixins/bookForm
+    +bookForm(book, genres, `/books/add`, `/books`)

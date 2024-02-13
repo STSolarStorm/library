@@ -1,0 +1,47 @@
+extends ../layout2
+
+block content
+    a(href=`/mangaka/edit/${mangaka.id}`) Edit Mangaka
+    a(href=`/mangaka/delete/${mangaka.id}`) Delete Mangaka
+    div.mangaka-profile
+        div.mangaka-info
+            h3 Name: #{mangaka.first_name} #{mangaka.last_name}
+            p Date of Birth: #{mangaka.date_of_birth}
+            P Number of Manga Created: #{mangaka.num_of_books}
+        div.mangaka-pic
+            img(src=mangaka.image)
+
+    h4 Available Manga
+        if availableManga.length > 0
+            form(action=`/mangaka/${mangaka.id}/assign/` method='post')
+                select(name='manga' id='manga' autocomplete=off)
+                    each manga in availableManga
+                        option(value=manga.id) #{manga.title}
+                button.button.primary(type='submit') Assign Manga
+        else
+            p No remaining manga to assign.
+    h4 Mangaka's Manga
+    table
+        thead
+            tr
+                th Title
+                th Publisher/Magazine
+                th Genre
+                th Number of Chapters
+                th Number of Volumes
+                th Image
+                th Description
+
+        tbody
+            each manga in mangaka.manga
+                tr
+                    td= manga.title
+                    td= manga.publisher_magazine
+                    td= manga.genre
+                    td= manga.num_of_chapters
+                    td= manga.num_of_volumes
+                    td
+                        img(src=manga.image)
+                    td= manga.description
+                    td
+                        a.view-items(href=`/manga/profile/${manga.id}`) View Manga

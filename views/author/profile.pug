@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+    a(href=`/author/edit/${author.id}`) Edit Author
+    a(href=`/author/delete/${author.id}`) Delete Author
+    div.author-profile
+        div.author-info
+            h3 Name: #{author.first_name} #{author.last_name}
+            p Date of Birth: #{author.date_of_birth}
+            P Number of Books Written/Co-Written: #{author.num_of_books_written}
+        div.author-pic
+            img(src=author.image)
+
+    h4 Available Books
+    if availableBooks.length>0
+        form(action=`/author/${author.id}/assign/` method='post')
+            select(name='book' id='book' autocomplete=off)
+                each book in availableBooks
+                    option(value=book.id) #{book.title}
+            button.button.primary(type='submit') Assign Book
+    else
+        p No remaining book to assign.
+
+    div.books
+        h4 Author's Books
+        table
+            thead
+                tr
+                    th Book Name
+                    th Author
+                    th Publisher
+                    th Genre
+                    th Page Number
+                    th Image
+                    th Description
+            tbody
+                each book in author.books
+                    tr
+                        td= book.title
+                        td= book.publisher
+                        td= book.genre
+                        td= book.num_of_pages
+                        td
+                            img(src=book.image_of_cover)
+                        td= book.description
+                        td
+                            a(href=`/books/profile/${book.id}`) View Books

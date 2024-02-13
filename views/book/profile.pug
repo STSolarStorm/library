@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+    h3= book.title
+    a(href=`/books/edit/${book.id}`) Edit Book
+    a(href=`/books/delete/${book.id}`) Delete Book
+    div.book-profile
+        div.book-info
+            p Publisher: #{book.publisher}
+            p Genre : #{book.genre}
+            p Page Number: #{book.num_of_pages}
+            p= book.description
+        div.book-pic
+            img(src=book.image_of_cover)
+
+    h4 Available Authors
+    if unassignedAuthor.length>0
+        form(action=`/books/${book.id}/assign/` method='post')
+            select(name='author' id='author' autocomplete=off)
+                each author in unassignedAuthor
+                    option(value=author.id) #{author.first_name} #{author.last_name}
+            button.button.primary(type='submit') Assign Author
+    else
+        p Books have already been assigned to its rightful owner.
+
+    h4 Book's Author
+    table
+        thead
+            tr
+                th First Name
+                th Last Name
+                th Date of Birth
+        tbody
+            each author in book.author
+                tr
+                    td= author.first_name
+                    td= author.last_name
+                    td= author.date_of_birth
+                    td
+                        a(href=`/author/profile/${author.id}`) View Author
+                        a(href=`/books/${book.id}/removeAuthor/${author.id}`) Remove Author

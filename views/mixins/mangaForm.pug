@@ -1,0 +1,37 @@
+mixin mangaForm(manga, genres, saveUrl, cancelUrl)
+
+    div.form-container
+        form(action=saveUrl method='post')
+            div.form-input
+                label(for='title') Manga Title:
+                input(id='title' name='title' value=manga.title)
+
+            div.form-input
+                label(for='publisher_magazine') Publisher or Magazine:
+                input(id='publisher_magazine' name='publisher_magazine' value=manga.publisher_magazine)
+
+            div.form-input
+                label(for='genre') Genre:
+                select(id='genre' name='genre')
+                    each genre in genres
+                        option(value=genre selected = (genre === manga.genre)) #{genre}
+
+            div.form-input
+                label(for='num_of_chapters') Number of Chapters:
+                input(id='num_of_chapters' name='num_of_chapters' value=manga.num_of_chapters)
+
+            div.form-input
+                label(for='num_of_volumes') Number of Volumes:
+                input(id='num_of_volumes' name='num_of_volumes' value=manga.num_of_volumes)
+
+            div.form-input
+                label(for='image') Image of Manga:
+                input(id='image' name='image' value=manga.image)
+
+            div.form-input
+                label(for='description') Description:
+                input(id='description' name='description' value=manga.description)
+
+            div.form-buttons
+                a.button.cancel(href=cancelUrl) Cancel
+                button.button.primary(type='submit') Save

@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    h2.page-title Authors
+    a.create-new(href='/author/add') Add an Author
+    table
+        thead
+            tr
+                th First Name
+                th Last Name
+                th Date of Birth
+                th Number of Books Written/Co-Written
+
+        tbody
+            each author in authors
+                tr
+                    td= author.first_name
+                    td= author.last_name
+                    td= author.date_of_birth
+                    td= author.num_of_books_written
+                    td
+                        a.view-items(href=`/author/profile/${author.id}`) View Author

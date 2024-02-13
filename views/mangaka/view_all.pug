@@ -1,0 +1,23 @@
+extends ../layout2
+
+block content
+    h2.page-title Mangaka
+    a.create-new(href='/mangaka/add') Add mangaka
+    table
+        thead
+            tr
+                th First Name
+                th Last Name
+                th Date of Birth
+                th Number of Books/Manga Created
+
+
+        tbody
+            each mangaka in mangakas
+                tr
+                    td= mangaka.first_name
+                    td= mangaka.last_name
+                    td= mangaka.date_of_birth
+                    td= mangaka.num_of_books
+                    td
+                        a.view-items(href=`/mangaka/profile/${mangaka.id}`) View Mangaka
